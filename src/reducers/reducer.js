@@ -20,16 +20,13 @@ export const todo = [
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case "ADD":
-      return {
-        item: action.payload,
+    case ("ADD"):
+      return [ //* an array of objects
+        ...state, //*all the elements in the array already
+        {item: action.payload, //*and one more newly formed object to add.
         completed: false,
-        id: uuidv4(),
-      };
-    case "TOGGLE":
-      return;
-    case "CLEAR":
-      return;
+        id: uuidv4(),}
+      ];
     default:
       return state;
   }
