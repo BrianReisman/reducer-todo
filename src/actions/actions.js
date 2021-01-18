@@ -15,3 +15,9 @@ const CLEAR = 'CLEAR';
 export const addItem = (newItem) => {
   return {type: ADD, payload: newItem}
 }
+export const toggleItem = (isSelected) => {
+  return {type: TOGGLE, payload: isSelected}
+}
+export const clearCompleted = () => { //*no argument taken
+  return {type: CLEAR} //*no argument, no payload/data needed
+}

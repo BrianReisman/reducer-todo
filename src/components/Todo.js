@@ -2,14 +2,12 @@ import React, { useReducer, useState } from "react";
 import { todo, reducer } from "../reducers/reducer";
 
 //These are custom action objects.
-import {addItem} from '../actions/actions';
+import { addItem, toggleItem, clearCompleted } from "../actions/actions";
 
 const Todo = (props) => {
   const [inputValue, setInputValue] = useState("");
   const [state, dispatch] = useReducer(reducer, todo);
   console.log(state);
-
-
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -17,18 +15,28 @@ const Todo = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // dispatch({type: "ADD", payload: inputValue})
-    dispatch(addItem(inputValue))
-    
-    
+    dispatch(addItem(inputValue));
     setInputValue("");
   };
 
+  const handleToggle = (completedStatus) => {
+    console.log(completedStatus)
+    dispatch(toggleItem(completedStatus))
+  }
+
+  const handleClear = (e) => {
+    e.preventDefault();
+    dispatch(clearCompleted())
+  }
+  const asdf = () => {
+    return;
+  }
   const todosToRender = state.map((todo) => {
-    return <p>{todo.item}</p>;
+    console.log(todo.completed)
+    //*on click called handleToggle passing in this todos completed status.
+    return <p onClick={asdf}>{todo.item}</p>;
   });
-  
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -41,6 +49,7 @@ const Todo = (props) => {
         />
       </form>
       {todosToRender}
+      <button onClick={handleClear}>Clear Completed</button>
     </div>
   );
 };
