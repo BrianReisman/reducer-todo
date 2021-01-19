@@ -19,22 +19,27 @@ const Todo = (props) => {
     setInputValue("");
   };
 
-  const handleToggle = (completedStatus) => {
-    console.log(completedStatus)
-    dispatch(toggleItem(completedStatus))
-  }
-
   const handleClear = (e) => {
     e.preventDefault();
-    dispatch(clearCompleted())
-  }
-  const asdf = () => {
-    return;
-  }
-  const todosToRender = state.map((todo) => {
-    console.log(todo.completed)
+    dispatch(clearCompleted());
+  };
+
+  const handleToggle = (todo) => {
+    dispatch(toggleItem(todo.id));
+  };
+
+  const todosToRender = state.map((todo, i) => {
     //*on click called handleToggle passing in this todos completed status.
-    return <p onClick={asdf}>{todo.item}</p>;
+    return (
+      <p
+        className={String(todo.completed)}
+        onClick={() => {
+          handleToggle(todo);
+        }}
+      >
+        {todo.item}
+      </p>
+    );
   });
 
   return (
@@ -46,7 +51,8 @@ const Todo = (props) => {
           id="newItem"
           onChange={handleChange}
           value={inputValue}
-        />
+        />{" "}
+        <button>Add todo</button>
       </form>
       {todosToRender}
       <button onClick={handleClear}>Clear Completed</button>

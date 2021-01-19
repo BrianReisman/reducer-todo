@@ -8,7 +8,7 @@ export const todo = [
   },
   {
     item: "Finish Udemy Course Section",
-    completed: true,
+    completed: false,
     id: uuidv4(),
   },
   {
@@ -19,7 +19,6 @@ export const todo = [
 ];
 
 export const reducer = (state, action) => {
-  console.log(state);
   switch (action.type) {
     case "ADD":
       return [
@@ -32,7 +31,17 @@ export const reducer = (state, action) => {
         },
       ];
     case "TOGGLE":
-      return state;
+      const toggledArray = state.map((item) => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            completed: true,
+          };
+        } else {
+          return item;
+        }
+      });
+      return toggledArray;
     case "CLEAR":
       const filteredArray = state.filter((item) => {
         if (!item.completed) {

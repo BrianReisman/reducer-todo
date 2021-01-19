@@ -2,9 +2,9 @@
 // Toggle
 // Clearing
 
-const ADD = 'ADD';
-const TOGGLE = 'TOGGLE';
-const CLEAR = 'CLEAR';
+const ADD = "ADD";
+const TOGGLE = "TOGGLE";
+const CLEAR = "CLEAR";
 
 //*What do I need to receive to act on this?
 //*What do I want to return?
@@ -13,11 +13,13 @@ const CLEAR = 'CLEAR';
 //*   3. MAYBE have a payload: property. If the action TAKES an argument, then it GIVES a payload: property to its returned object.
 
 export const addItem = (newItem) => {
-  return {type: ADD, payload: newItem}
-}
-export const toggleItem = (isSelected) => {
-  return {type: TOGGLE, payload: isSelected}
-}
-export const clearCompleted = () => { //*no argument taken
-  return {type: CLEAR} //*no argument, no payload/data needed
-}
+  return { type: ADD, payload: newItem };
+};
+export const toggleItem = (itemID) => {
+  //*just call it and make it not what it is
+  return { type: TOGGLE, payload: itemID};
+};
+export const clearCompleted = () => {
+  //*no argument taken
+  return { type: CLEAR }; //*no argument, no payload/data needed
+};
